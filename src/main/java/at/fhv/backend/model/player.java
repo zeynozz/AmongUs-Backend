@@ -4,11 +4,11 @@ public class player {
     private static int idCounter = 1;
     private int id;
     private String username;
-    private at.fhv.backend.model.position position;
-    private at.fhv.backend.model.game game;
+    private position position;
+    private game game;
     private String role;
 
-    public player(String username, at.fhv.backend.model.position position, at.fhv.backend.model.game game) {
+    public player(String username, position position, game game) {
         this.id = idCounter++;
         this.username = username;
         this.position = position;
@@ -39,7 +39,7 @@ public class player {
         return position;
     }
 
-    public void setPosition(at.fhv.backend.model.position position) {
+    public void setPosition(int position) {
         this.position = position;
     }
 
@@ -50,4 +50,13 @@ public class player {
     public void setRole(String role) {
         this.role = role;
     }
+
+    public at.fhv.backend.model.game getGame() {
+        return game;
+    }
+
+    public void setGame(at.fhv.backend.model.game game) {
+        this.game = game;
+    }
 }
+
