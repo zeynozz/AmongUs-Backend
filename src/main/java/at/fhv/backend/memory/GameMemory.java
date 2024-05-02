@@ -1,22 +1,22 @@
-package at.fhv.backend.storage;
+package at.fhv.backend.memory;
 
-import at.fhv.backend.model.game;
+import at.fhv.backend.model.Game;
 import org.springframework.stereotype.Repository;
 
 import java.util.HashMap;
 
 @Repository
-public class gameStorage {
-    private final HashMap<String, game> games = new HashMap<>();
+public class GameMemory {
+    private final HashMap<String, Game> games = new HashMap<>();
 
-    public void save(game game) {
+    public void save(Game game) {
         games.put(game.getGameCode(), game);
-        for (at.fhv.backend.model.game g : games.values()) {
+        for (Game g : games.values()) {
             System.out.println("Your Game Code: " + g.getGameCode());
         }
     }
 
-    public game findByGameCode(String gameCode) {
+    public Game findByGameCode(String gameCode) {
         return games.get(gameCode);
     }
 

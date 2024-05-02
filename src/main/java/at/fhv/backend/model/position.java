@@ -1,14 +1,14 @@
 package at.fhv.backend.model;
 
-public class position {
+public class Position {
     private int x;
     private int y;
 
-    public position() {
+    public Position() {
 
     }
 
-    public position(int x, int y) {
+    public Position(int x, int y) {
         this.x = x;
         this.y = y;
     }

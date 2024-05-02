@@ -1,19 +1,20 @@
 package at.fhv.backend.model.com;
 
+import at.fhv.backend.model.Position;
 import lombok.Getter;
 import lombok.Setter;
 
 @Setter
 @Getter
-public class joinCom {
+public class JoinCom {
     private String username;
-    private at.fhv.backend.model.position position;
+    private Position position;
     private String gameCode;
 
-    public joinCom() {
+    public JoinCom() {
     }
 
-    public joinCom(String username, at.fhv.backend.model.position position) {
+    public JoinCom(String username, Position position) {
         this.username = username;
         this.position = position;
     }

@@ -1,14 +1,14 @@
 package at.fhv.backend.model;
 
-public class player {
+public class Player {
     private static int idCounter = 1;
     private int id;
     private String username;
-    private at.fhv.backend.model.position position;
-    private at.fhv.backend.model.game game;
+    private Position position;
+    private Game game;
     private String role;
 
-    public player(String username, at.fhv.backend.model.position position, at.fhv.backend.model.game game) {
+    public Player(String username, Position position, Game game) {
         this.id = idCounter++;
         this.username = username;
         this.position = position;
@@ -16,7 +16,7 @@ public class player {
         this.role = "Crewmate";
     }
 
-    public player() {
+    public Player() {
     }
 
     public int getId() {
@@ -35,11 +35,11 @@ public class player {
         this.username = username;
     }
 
-    public at.fhv.backend.model.position getPosition() {
+    public Position getPosition() {
         return position;
     }
 
-    public void setPosition(at.fhv.backend.model.position position) {
+    public void setPosition(Position position) {
         this.position = position;
     }
 

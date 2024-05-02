@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class playerRoleGenerator {
+public class RoleGenerator {
     public static List<Integer> impostors = new ArrayList<>();
 
     public static List<Integer> generatePlayerRole(int numPlayers, int numImpostors) {

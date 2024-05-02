@@ -2,7 +2,7 @@ package at.fhv.backend.generators;
 
 import java.security.SecureRandom;
 
-public class gameCodeGenerator {
+public class CodeGenerator {
     private static final String chr = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
     private static final int len = 6;
 

@@ -5,12 +5,12 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class moveCom {
+public class MoveCom {
     private int id;
     private String keyCode;
     private String gameCode;
 
-    public moveCom(int id, String keyCode, String gameCode) {
+    public MoveCom(int id, String keyCode, String gameCode) {
         this.id = id;
         this.keyCode = keyCode;
         this.gameCode = gameCode;

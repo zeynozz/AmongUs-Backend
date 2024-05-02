@@ -1,8 +1,11 @@
 package at.fhv.backend.controller;
 
 import at.fhv.backend.model.*;
-import at.fhv.backend.model.com.gameCom;
-import at.fhv.backend.model.com.joinCom;
+import at.fhv.backend.model.com.GameCom;
+import at.fhv.backend.model.com.JoinCom;
+import at.fhv.backend.model.com.MoveCom;
+import at.fhv.backend.services.GameService;
+import at.fhv.backend.services.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,35 +15,38 @@ import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.FileNotFoundException;
+
 @Controller
 @RequestMapping("/game")
-public class gameController {
-    private final at.fhv.backend.services.gameService gameService;
-    private final at.fhv.backend.services.playerService playerService;
+public class GameController {
+    private final GameService gameService;
+    private final PlayerService playerService;
 
     @Autowired
-    public gameController(at.fhv.backend.services.gameService gameService, at.fhv.backend.services.playerService playerservice) {
+    public GameController(GameService gameService, PlayerService playerservice) {
         this.gameService = gameService;
         this.playerService = playerservice;
     }
 
     @PostMapping("/host")
-    public ResponseEntity<game> host(@RequestBody gameCom gameCom) {
-        System.out.println("Request from: " + gameCom.getPlayer().getUsername());
+    public ResponseEntity<Game> host(@RequestBody GameCom GameCom) throws FileNotFoundException {
+        System.out.println("Received request to create game with username: " + GameCom.getPlayer().getUsername() + " number of players: " + GameCom.getNumberOfPlayers() + " number of impostors: " + GameCom.getNumberOfImpostors() + " map: " + GameCom.getMap());
 
-        game hosted = gameService.host(gameCom.getPlayer(), Integer.parseInt(gameCom.getNumberOfPlayers()), Integer.parseInt(gameCom.getNumberOfImpostors()));
+        Game createdGame = gameService.host(GameCom.getPlayer(), Integer.parseInt(GameCom.getNumberOfPlayers()), Integer.parseInt(GameCom.getNumberOfImpostors()), GameCom.getMap());
 
-        if (hosted != null) {
-            return ResponseEntity.ok(hosted);
+        if (createdGame != null) {
+            return ResponseEntity.ok(createdGame);
         } else {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
 
+
     @GetMapping("/{gameCode}")
-    public ResponseEntity<game> getGameByCode(@PathVariable String gameCode) {
+    public ResponseEntity<Game> getGameByCode(@PathVariable String gameCode) {
         System.out.println("Code: " + gameCode);
-        game game = gameService.getGameByCode(gameCode);
+        Game game = gameService.getGameByCode(gameCode);
         if (game != null) {
             return ResponseEntity.ok(game);
         } else {
@@ -50,7 +56,7 @@ public class gameController {
 
     @MessageMapping("/join")
     @SendTo("/topic/playerJoined")
-    public ResponseEntity<?> createPlayer(@Payload joinCom joinMessage) {
+    public ResponseEntity<?> createPlayer(@Payload JoinCom joinMessage) {
         if (joinMessage == null ||
                 joinMessage.getUsername() == null ||
                 joinMessage.getGameCode() == null) {
@@ -58,7 +64,7 @@ public class gameController {
         }
 
         try {
-            game game = gameService.getGameByCode(joinMessage.getGameCode());
+            Game game = gameService.getGameByCode(joinMessage.getGameCode());
 
             if (game == null) {
                 return ResponseEntity.notFound().build();
@@ -68,7 +74,7 @@ public class gameController {
                 return ResponseEntity.badRequest().body("Lobby is full :(");
             }
 
-            player player = playerService.createPlayer(joinMessage.getUsername(), joinMessage.getPosition(), game);
+            Player player = playerService.createPlayer(joinMessage.getUsername(), joinMessage.getPosition(), game);
             game.getPlayers().add(player);
 
             game.setPlayers(playerService.setRandomRole(game.getPlayers()));
@@ -82,8 +88,8 @@ public class gameController {
 
     @MessageMapping("/{gameCode}/play")
     @SendTo("/topic/{gameCode}/play")
-    public game playGame(@RequestBody game gameToPlay) {
-        game game = gameService.startGame(gameToPlay.getGameCode());
+    public Game playGame(@RequestBody Game gameToPlay) {
+        Game game = gameService.startGame(gameToPlay.getGameCode());
         gameService.setGameAttributes(gameToPlay.getGameCode(), gameToPlay.getPlayers());
 
         for (int i = 0; i < game.getPlayers().size(); i++) {
@@ -91,5 +97,22 @@ public class gameController {
                     " Role: " + game.getPlayers().get(i).getRole());
         }
         return game;
+    }
+
+    @MessageMapping("/move")
+    @SendTo("/topic/positionChange")
+    public Game movePlayer(@Payload MoveCom playerMoveMessage) {
+        int playerId = playerMoveMessage.getId();
+        Game game = gameService.getGameByCode(playerMoveMessage.getGameCode());
+        Player player = game.getPlayers().stream().filter(p -> p.getId() == playerId).findFirst().orElse(null);
+
+        if (player != null) {
+            Position newPosition = playerService.calculateNewPosition(player.getPosition(), playerMoveMessage.getKeyCode());
+            playerService.updatePlayerPosition(player, newPosition);
+            System.out.println("Player ID: " + playerId + " moved to position: " + player.getPosition().getX() + ", " + player.getPosition().getY());
+            return game;
+        }
+
+        return null;
     }
 }
