@@ -5,23 +5,23 @@ import java.util.List;
 import java.util.Random;
 
 public class RoleGenerator {
-    public static List<Integer> impostors = new ArrayList<>();
+    public static List<Integer> imposters = new ArrayList<>();
 
     public static List<Integer> generatePlayerRole(int numPlayers, int numImpostors) {
-        impostors = new ArrayList<>();
+        imposters = new ArrayList<>();
         Random random = new Random();
 
-        while (impostors.size() < numImpostors) {
+        while (imposters.size() < numImpostors) {
             int randomIndex = random.nextInt(numPlayers);
-            if (!impostors.contains(randomIndex)) {
-                impostors.add(randomIndex);
+            if (!imposters.contains(randomIndex)) {
+                imposters.add(randomIndex);
             }
         }
-        return impostors;
+        return imposters;
     }
 
     public static List<Integer> getImpostorsIndices() {
-        return impostors;
+        return imposters;
     }
 
 }

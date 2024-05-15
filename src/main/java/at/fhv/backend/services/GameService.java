@@ -14,7 +14,6 @@ import java.util.List;
 public class GameService {
     private final GameMemory gameRepository;
     private final PlayerService playerService;
-
     private final MapService mapService;
     @Autowired
     public GameService(GameMemory gameRepository, PlayerService playerService, MapService mapService) {
