@@ -73,6 +73,7 @@ public class PlayerService {
 
     public Player setInitialRandomRole(int numPlayers, int numImpostors, Player player) {
         List<Integer> impostorsIndices = RoleGenerator.generatePlayerRole(numPlayers, numImpostors);
+        System.out.println("Impostorsindices : " + impostorsIndices);
         if (impostorsIndices.contains(player.getId())) {
             player.setRole("Impostor");
         }
