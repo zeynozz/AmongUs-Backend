@@ -17,36 +17,51 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.FileNotFoundException;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/game")
 public class GameController {
     private final GameService gameService;
     private final PlayerService playerService;
+    private final Map<String, Game> games = new HashMap<>();
 
     @Autowired
-    public GameController(GameService gameService, PlayerService playerservice) {
+    public GameController(GameService gameService, PlayerService playerService) {
         this.gameService = gameService;
-        this.playerService = playerservice;
+        this.playerService = playerService;
     }
 
     @PostMapping("/host")
-    public ResponseEntity<Game> host(@RequestBody GameCom GameCom) throws FileNotFoundException {
-        System.out.println("Received request to create game with username: " + GameCom.getPlayer().getUsername() + " number of players: " + GameCom.getNumberOfPlayers() + " number of impostors: " + GameCom.getNumberOfImpostors() + " map: " + GameCom.getMap());
-
-        Game createdGame = gameService.host(GameCom.getPlayer(), Integer.parseInt(GameCom.getNumberOfPlayers()), Integer.parseInt(GameCom.getNumberOfImpostors()), GameCom.getMap());
-
+    public ResponseEntity<Game> host(@RequestBody GameCom gameCom) throws FileNotFoundException {
+        Game createdGame = gameService.host(gameCom.getPlayer(), Integer.parseInt(gameCom.getNumberOfPlayers()), Integer.parseInt(gameCom.getNumberOfImpostors()), gameCom.getMap());
         if (createdGame != null) {
+            games.put(createdGame.getGameCode(), createdGame);
             return ResponseEntity.ok(createdGame);
         } else {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
 
+    @MessageMapping("/updatePlayerColor")
+    @SendTo("/topic/colorChange")
+    public Player updatePlayerColor(@Payload Player updatedPlayer) {
+        Game game = games.get(updatedPlayer.getGame().getGameCode());
+        if (game != null) {
+            for (Player player : game.getPlayers()) {
+                if (player.getId() == updatedPlayer.getId()) {
+                    player.setColor(updatedPlayer.getColor());
+                    break;
+                }
+            }
+            gameService.notifyColorChange(game, updatedPlayer);
+        }
+        return updatedPlayer;
+    }
 
     @GetMapping("/{gameCode}")
     public ResponseEntity<Game> getGameByCode(@PathVariable String gameCode) {
-        System.out.println("Code: " + gameCode);
         Game game = gameService.getGameByCode(gameCode);
         if (game != null) {
             return ResponseEntity.ok(game);
@@ -58,9 +73,7 @@ public class GameController {
     @MessageMapping("/join")
     @SendToUser("/topic/playerJoined")
     public ResponseEntity<?> createPlayer(@Payload JoinCom joinMessage) {
-        if (joinMessage == null ||
-                joinMessage.getUsername() == null ||
-                joinMessage.getGameCode() == null) {
+        if (joinMessage == null || joinMessage.getUsername() == null || joinMessage.getGameCode() == null) {
             return ResponseEntity.badRequest().body("Error - creating the player");
         }
 
@@ -93,9 +106,8 @@ public class GameController {
         Game game = gameService.startGame(gameToPlay.getGameCode());
         gameService.setGameAttributes(gameToPlay.getGameCode(), gameToPlay.getPlayers());
 
-        for (int i = 0; i < game.getPlayers().size(); i++) {
-            System.out.println("Player id: " + game.getPlayers().get(i).getId() +
-                    " Role: " + game.getPlayers().get(i).getRole());
+        for (Player player : game.getPlayers()) {
+            System.out.println("Player id: " + player.getId() + " Role: " + player.getRole());
         }
         return game;
     }

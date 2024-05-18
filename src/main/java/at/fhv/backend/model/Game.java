@@ -1,5 +1,6 @@
 package at.fhv.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
 import at.fhv.backend.services.MapService;
@@ -16,7 +17,8 @@ public class Game {
     private int numberOfPlayers;
     private int numberOfImpostors;
     private Map map;
-    private List<Player> Players;
+    @JsonManagedReference
+    private List<Player> Players = new ArrayList<>();
     private int gameID = 0;
 
     public Game(String gameCode, int numberOfPlayers, int numberOfImpostors, String map, List<Player> Players) throws FileNotFoundException {

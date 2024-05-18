@@ -6,12 +6,14 @@
   <component name="ChangeListManager">
     <list default="true" id="fc3f0e3b-784e-408a-8c4d-c11663bf0190" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/generators/RoleGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhv/backend/generators/RoleGenerator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/controller/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhv/backend/controller/GameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/model/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhv/backend/model/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/model/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhv/backend/model/Player.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/services/GameService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhv/backend/services/GameService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/services/PlayerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhv/backend/services/PlayerService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/at/fhv/backend/WebSocketConfig.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/at/fhv/backend/WebSocketConfig.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/at/fhv/backend/controller/gameController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/at/fhv/backend/controller/gameController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/at/fhv/backend/model/game.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/at/fhv/backend/model/game.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/at/fhv/backend/model/player.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/at/fhv/backend/model/player.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/at/fhv/backend/services/gameService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/at/fhv/backend/services/gameService.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,6 +34,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="ProjectErrors" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;customColor&quot;: &quot;&quot;,
   &quot;associatedIndex&quot;: 4
@@ -41,25 +46,25 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "imposter",
-    "last_opened_file_path": "/Users/zeyno/Documents/AmongUs-Backend",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;bugSolve&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/kulac/Documents/AmongUs-Backend&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/java/at/fhv/backend/utils" />
@@ -109,6 +114,8 @@
       <workItem from="1714555446652" duration="5651000" />
       <workItem from="1714650697713" duration="2600000" />
       <workItem from="1715763977259" duration="3679000" />
+      <workItem from="1716062347798" duration="3767000" />
+      <workItem from="1716066132148" duration="217000" />
     </task>
     <servers />
   </component>

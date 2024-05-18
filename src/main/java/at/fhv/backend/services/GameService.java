@@ -5,6 +5,7 @@ import at.fhv.backend.generators.CodeGenerator;
 import at.fhv.backend.model.Player;
 import at.fhv.backend.memory.GameMemory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
 import java.io.FileNotFoundException;
@@ -15,28 +16,22 @@ public class GameService {
     private final GameMemory gameRepository;
     private final PlayerService playerService;
     private final MapService mapService;
+    private final SimpMessagingTemplate messagingTemplate;
+
     @Autowired
-    public GameService(GameMemory gameRepository, PlayerService playerService, MapService mapService) {
+    public GameService(GameMemory gameRepository, PlayerService playerService, MapService mapService, SimpMessagingTemplate messagingTemplate) {
         this.gameRepository = gameRepository;
         this.playerService = playerService;
         this.mapService = mapService;
-
+        this.messagingTemplate = messagingTemplate;
     }
 
     public Game host(Player player, int numberOfPlayers, int numberOfImpostors, String map) throws FileNotFoundException {
         Game game = new Game(gameCodeGenerator(), numberOfPlayers, numberOfImpostors, map, mapService);
-
-        System.out.println("Game Code: " + game.getGameCode());
         Player p = playerService.createPlayer(player.getUsername(), player.getPosition(), game);
-
         p = playerService.setInitialRandomRole(game.getNumberOfPlayers(), game.getNumberOfImpostors(), p);
         game.getPlayers().add(p);
         gameRepository.save(game);
-
-        for (int i = 0; i < game.getPlayers().size(); i++) {
-            System.out.println("Player ID: " + game.getPlayers().get(i).getId() + " Game Role: " + game.getPlayers().get(i).getRole());
-        }
-
         return game;
     }
 
@@ -56,12 +51,16 @@ public class GameService {
         return game;
     }
 
-    public Game setGameAttributes(String gameCode, List<Player> Players) {
+    public Game setGameAttributes(String gameCode, List<Player> players) {
         Game game = gameRepository.findByGameCode(gameCode);
         if (game != null) {
-            game.setPlayers(Players);
+            game.setPlayers(players);
             gameRepository.save(game);
         }
         return game;
+    }
+
+    public void notifyColorChange(Game game, Player updatedPlayer) {
+        messagingTemplate.convertAndSend("/topic/" + game.getGameCode() + "/colorChange", updatedPlayer);
     }
 }
