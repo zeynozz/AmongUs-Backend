@@ -3,6 +3,7 @@ package at.fhv.backend.model;
 import lombok.Getter;
 import lombok.Setter;
 import at.fhv.backend.services.MapService;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -16,17 +17,19 @@ public class Game {
     private int numberOfPlayers;
     private int numberOfImpostors;
     private Map map;
-    private List<Player> Players;
+
+    @JsonManagedReference
+    private List<Player> players;
     private int gameID = 0;
 
-    public Game(String gameCode, int numberOfPlayers, int numberOfImpostors, String map, List<Player> Players) throws FileNotFoundException {
+    public Game(String gameCode, int numberOfPlayers, int numberOfImpostors, String map, List<Player> players) throws FileNotFoundException {
         this.gameCode = gameCode;
         this.numberOfPlayers = numberOfPlayers;
         this.numberOfImpostors = numberOfImpostors;
         this.map = new Map();
         this.map.setInitialMap(map);
         System.out.println("Map: " + Arrays.toString(this.map.getMap()[0]));
-        this.Players = Players;
+        this.players = players;
         setGameID();
     }
 
@@ -34,6 +37,15 @@ public class Game {
         this(gameCode, numberOfPlayers, numberOfImpostors, map, new ArrayList<>());
         mapService.setMap(mapService.getInitialMap(map).getMap());
         setGameID();
+    }
+
+    public static Player findNearbyCrewmate(Player impostor, List<Player> players, int proximity){
+        for (Player player : players) {
+            if (player.isAlive() && !player.getRole().equals("Impostor") && impostor.isNearby(player, proximity)) {
+                return player;
+            }
+        }
+        return null;
     }
 
     public Game() {
@@ -51,5 +63,4 @@ public class Game {
     public void setMap(int[][] map) {
         this.map.setMap(map);
     }
-
 }

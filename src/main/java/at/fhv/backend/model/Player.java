@@ -1,18 +1,21 @@
 package at.fhv.backend.model;
 
 import lombok.Getter;
+import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
+@Getter
+@Setter
 public class Player {
     private static int idCounter = 1;
-    @Getter
     private int id;
-    @Getter
     private String username;
-    @Getter
     private Position position;
+
+    @JsonBackReference
     private Game game;
-    @Getter
     private String role;
+    private boolean isAlive;
 
     public Player(String username, Position position, Game game) {
         this.id = idCounter++;
@@ -20,24 +23,20 @@ public class Player {
         this.position = position;
         this.game = game;
         this.role = "Crewmate";
+        this.isAlive = true;
     }
 
     public Player() {
+        this.isAlive = true;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public boolean isNearby(Player other, int proximity) {
+        // Assuming Position class has getX() and getY() methods
+        return Math.abs(this.position.getX() - other.position.getX()) <= proximity &&
+                Math.abs(this.position.getY() - other.position.getY()) <= proximity;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public void setPosition(Position position) {
-        this.position = position;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
+    public void kill() {
+        this.isAlive = false;
     }
 }

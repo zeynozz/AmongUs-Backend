@@ -116,4 +116,29 @@ public class GameController {
 
         return null;
     }
+
+    @PostMapping("/kill")
+    public ResponseEntity<Game> attemptKill(@RequestBody KillRequestMessage killRequestMessage) {
+        int playerId = killRequestMessage.getPlayerId();
+        Game game = gameService.getGameByCode(killRequestMessage.getGameCode());
+        Player player = game.getPlayers().stream().filter(p -> p.getId() == playerId).findFirst().orElse(null);
+
+        if (player != null) {
+            Player target = game.getPlayers().stream().filter(p -> p.getId() == killRequestMessage.getTargetId()).findFirst().orElse(null);
+            if (target != null) {
+                // Entferne den getöteten Spieler aus dem Spiel
+                game.getPlayers().remove(target);
+                System.out.println("Player ID: " + playerId + " killed Player ID: " + target.getId());
+                return ResponseEntity.ok(game);
+            } else {
+                System.out.println("Target player not found.");
+            }
+        }
+
+        return ResponseEntity.notFound().build();
+    }
+
+
+
+
 }
