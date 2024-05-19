@@ -28,10 +28,18 @@ public class GameService {
 
     public Game host(Player player, int numberOfPlayers, int numberOfImpostors, String map) throws FileNotFoundException {
         Game game = new Game(gameCodeGenerator(), numberOfPlayers, numberOfImpostors, map, mapService);
+
+        System.out.println("Game Code: " + game.getGameCode());
         Player p = playerService.createPlayer(player.getUsername(), player.getPosition(), game);
+
         p = playerService.setInitialRandomRole(game.getNumberOfPlayers(), game.getNumberOfImpostors(), p);
         game.getPlayers().add(p);
         gameRepository.save(game);
+
+        for (int i = 0; i < game.getPlayers().size(); i++) {
+            System.out.println("Player ID: " + game.getPlayers().get(i).getId() + " Game Role: " + game.getPlayers().get(i).getRole());
+        }
+
         return game;
     }
 
@@ -51,10 +59,10 @@ public class GameService {
         return game;
     }
 
-    public Game setGameAttributes(String gameCode, List<Player> players) {
+    public Game setGameAttributes(String gameCode, List<Player> Players) {
         Game game = gameRepository.findByGameCode(gameCode);
         if (game != null) {
-            game.setPlayers(players);
+            game.setPlayers(Players);
             gameRepository.save(game);
         }
         return game;

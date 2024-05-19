@@ -84,9 +84,9 @@ public class PlayerService {
         List<Integer> impostorsIndices = RoleGenerator.getImpostorsIndices();
         for (int i = 0; i < Players.size(); i++) {
             if (impostorsIndices.contains(i)) {
-                Players.get(i).setRole("Impostor");
+                Players.get(i).setRole("IMPOSTOR");
             } else {
-                Players.get(i).setRole("Crewmate");
+                Players.get(i).setRole("CREWMATE");
             }
         }
         return Players;
