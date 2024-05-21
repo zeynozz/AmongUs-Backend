@@ -3,6 +3,7 @@ package at.fhv.backend.controller;
 import at.fhv.backend.model.*;
 import at.fhv.backend.model.com.GameCom;
 import at.fhv.backend.model.com.JoinCom;
+import at.fhv.backend.model.com.KillCom;
 import at.fhv.backend.model.com.MoveCom;
 import at.fhv.backend.services.GameService;
 import at.fhv.backend.services.PlayerService;
@@ -12,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.messaging.simp.annotation.SendToUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -25,12 +27,14 @@ import java.util.Map;
 public class GameController {
     private final GameService gameService;
     private final PlayerService playerService;
+    private final SimpMessagingTemplate messagingTemplate; // Injected messaging template
     private final Map<String, Game> games = new HashMap<>();
 
     @Autowired
-    public GameController(GameService gameService, PlayerService playerService) {
+    public GameController(GameService gameService, PlayerService playerService, SimpMessagingTemplate messagingTemplate) {
         this.gameService = gameService;
         this.playerService = playerService;
+        this.messagingTemplate = messagingTemplate; // Initialize messaging template
     }
 
     @PostMapping("/host")
@@ -127,5 +131,42 @@ public class GameController {
         }
 
         return null;
+    }
+
+    @MessageMapping("/kill")
+    @SendTo("/topic/playerKilled")
+    public ResponseEntity<Game> killPlayer(@Payload KillCom killCom) {
+        Game game = games.get(killCom.getGameCode());
+        if (game != null) {
+            Player killer = game.getPlayers().stream().filter(p -> p.getId() == killCom.getKillerId()).findFirst().orElse(null);
+            Player victim = game.getPlayers().stream().filter(p -> p.getId() == killCom.getVictimId()).findFirst().orElse(null);
+            if (killer != null && victim != null && "IMPOSTOR".equals(killer.getRole())) {
+                if (isAdjacent(killer.getPosition(), victim.getPosition())) {
+                    game.getPlayers().remove(victim);
+                    System.out.println("The player is removed");
+                    sendPlayerRemovedMessage(killCom.getGameCode(), killCom.getVictimId()); // Send the removed player ID to all clients
+                    return ResponseEntity.ok(game);
+                } else {
+                    System.err.println("Victim is not adjacent to the impostor");
+                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(game); // Return the game object even in case of failure
+                }
+            }
+        }
+        System.err.println("Kill action failed");
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null); // Return null or an empty game object in case of failure
+    }
+
+    private void sendPlayerRemovedMessage(String gameCode, int playerId) {
+        Map<String, Object> message = new HashMap<>();
+        message.put("gameCode", gameCode);
+        message.put("removedPlayerId", playerId);
+
+        messagingTemplate.convertAndSend("/topic/playerRemoved", message);
+    }
+
+    private boolean isAdjacent(Position pos1, Position pos2) {
+        int xDiff = Math.abs(pos1.getX() - pos2.getX());
+        int yDiff = Math.abs(pos1.getY() - pos2.getY());
+        return (xDiff == 1 && yDiff == 0) || (xDiff == 0 && yDiff == 1);
     }
 }
