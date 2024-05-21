@@ -4,14 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fc3f0e3b-784e-408a-8c4d-c11663bf0190" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/at/fhv/backend/model/com/KillCom.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/controller/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhv/backend/controller/GameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/at/fhv/backend/controller/gameController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/at/fhv/backend/controller/gameController.class" afterDir="false" />
-    </list>
+    <list default="true" id="fc3f0e3b-784e-408a-8c4d-c11663bf0190" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -155,7 +148,7 @@
       <workItem from="1716294014037" duration="14124000" />
       <workItem from="1716317848018" duration="109000" />
       <workItem from="1716318316182" duration="137000" />
-      <workItem from="1716324388170" duration="738000" />
+      <workItem from="1716324388170" duration="1330000" />
     </task>
     <servers />
   </component>
