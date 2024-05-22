@@ -70,6 +70,9 @@ public class MapLoader {
                         case 'D':
                             mapCells[row][col] = 12;
                             break;
+                        case 'V':
+                            mapCells[row][col] = 13;
+                            break;
                         case '-':
                             mapCells[row][col] = 0;
                             break;
