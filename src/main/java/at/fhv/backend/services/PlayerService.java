@@ -16,11 +16,11 @@ public class PlayerService {
         this.mapService = mapservice;
     }
 
-    public Player createPlayer(String username, Position position, Game game) {
+    public Player createPlayer(String username, Position position, Game game, String color) {
         if (!mapService.isCellWalkable(position.getX(), position.getY())) {
             position = findWalkablePosition();
         }
-        return new Player(username, position, game);
+        return new Player(username, position, game, color);
     }
 
     private Position findWalkablePosition() {
