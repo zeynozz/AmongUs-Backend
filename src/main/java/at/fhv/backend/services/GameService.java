@@ -30,7 +30,7 @@ public class GameService {
         Game game = new Game(gameCodeGenerator(), numberOfPlayers, numberOfImpostors, map, mapService);
 
         System.out.println("Game Code: " + game.getGameCode());
-        Player p = playerService.createPlayer(player.getUsername(), player.getPosition(), game);
+        Player p = playerService.createPlayer(player.getUsername(), player.getPosition(),game, player.getColor());
 
         p = playerService.setInitialRandomRole(game.getNumberOfPlayers(), game.getNumberOfImpostors(), p);
         game.getPlayers().add(p);
@@ -66,9 +66,5 @@ public class GameService {
             gameRepository.save(game);
         }
         return game;
-    }
-
-    public void notifyColorChange(Game game, Player updatedPlayer) {
-        messagingTemplate.convertAndSend("/topic/" + game.getGameCode() + "/colorChange", updatedPlayer);
     }
 }

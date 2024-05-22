@@ -48,22 +48,6 @@ public class GameController {
         }
     }
 
-    @MessageMapping("/updatePlayerColor")
-    @SendTo("/topic/colorChange")
-    public Player updatePlayerColor(@Payload Player updatedPlayer) {
-        Game game = games.get(updatedPlayer.getGame().getGameCode());
-        if (game != null) {
-            for (Player player : game.getPlayers()) {
-                if (player.getId() == updatedPlayer.getId()) {
-                    player.setColor(updatedPlayer.getColor());
-                    break;
-                }
-            }
-            gameService.notifyColorChange(game, updatedPlayer);
-        }
-        return updatedPlayer;
-    }
-
     @GetMapping("/{gameCode}")
     public ResponseEntity<Game> getGameByCode(@PathVariable String gameCode) {
         Game game = gameService.getGameByCode(gameCode);
@@ -77,7 +61,7 @@ public class GameController {
     @MessageMapping("/join")
     @SendToUser("/topic/playerJoined")
     public ResponseEntity<?> createPlayer(@Payload JoinCom joinMessage) {
-        if (joinMessage == null || joinMessage.getUsername() == null || joinMessage.getGameCode() == null) {
+        if (joinMessage == null || joinMessage.getUsername() == null || joinMessage.getGameCode() == null || joinMessage.getColor() == null) {
             return ResponseEntity.badRequest().body("Error - creating the player");
         }
 
@@ -92,7 +76,7 @@ public class GameController {
                 return ResponseEntity.badRequest().body("Lobby is full :(");
             }
 
-            Player player = playerService.createPlayer(joinMessage.getUsername(), joinMessage.getPosition(), game);
+            Player player = playerService.createPlayer(joinMessage.getUsername(), joinMessage.getPosition(), game, joinMessage.getColor());
             game.getPlayers().add(player);
 
             game.setPlayers(playerService.setRandomRole(game.getPlayers()));
@@ -103,6 +87,7 @@ public class GameController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error creating player: " + e.getMessage());
         }
     }
+
 
     @MessageMapping("/{gameCode}/play")
     @SendTo("/topic/{gameCode}/play")

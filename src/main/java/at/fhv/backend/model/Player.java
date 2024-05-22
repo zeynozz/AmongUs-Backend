@@ -3,14 +3,9 @@ package at.fhv.backend.model;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 
-import java.util.Random;
-
 public class Player {
     private static int idCounter = 1;
 
-    private static final String[] COLORS = {"white", "green", "blue", "pink", "purple"};
-
-    private static final Random RANDOM = new Random();
     @Getter
     private int id;
     @Getter
@@ -24,13 +19,13 @@ public class Player {
     @Getter
     private String color;
 
-    public Player(String username, Position position, Game game) {
+    public Player(String username, Position position, Game game, String color) {
         this.id = idCounter++;
         this.username = username;
         this.position = position;
         this.game = game;
         this.role = "Crewmate";
-        this.color = COLORS[RANDOM.nextInt(COLORS.length)];
+        this.color = color; // Set color from parameter
     }
 
     public Player() {
@@ -55,7 +50,6 @@ public class Player {
     public void setColor(String color) {
         this.color = color;
     }
-
     public Game getGame() {
         return this.game;
     }
