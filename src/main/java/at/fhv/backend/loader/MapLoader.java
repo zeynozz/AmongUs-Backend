@@ -40,6 +40,36 @@ public class MapLoader {
                         case '#':
                             mapCells[row][col] = 2;
                             break;
+                        case 'T':
+                            mapCells[row][col] = 3;
+                            break;
+                        case 'A':
+                            mapCells[row][col] = 4;
+                            break;
+                        case 'B':
+                            mapCells[row][col] = 5;
+                            break;
+                        case 'L':
+                            mapCells[row][col] = 6;
+                            break;
+                        case 'W':
+                            mapCells[row][col] = 7;
+                            break;
+                        case 'C':
+                            mapCells[row][col] = 8;
+                            break;
+                        case 'G':
+                            mapCells[row][col] = 9;
+                            break;
+                        case 'O':
+                            mapCells[row][col] = 10;
+                            break;
+                        case 'E':
+                            mapCells[row][col] = 11;
+                            break;
+                        case 'D':
+                            mapCells[row][col] = 12;
+                            break;
                         case '-':
                             mapCells[row][col] = 0;
                             break;
@@ -67,7 +97,10 @@ public class MapLoader {
                         System.out.print('+');
                     } else if (cell == 2) {
                         System.out.print('#');
-                    } else {
+                    } else if (cell == 3) {
+                        System.out.print('T');
+                    }
+                    else {
                         System.out.print('-');
                     }
                 }
