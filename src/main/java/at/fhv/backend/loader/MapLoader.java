@@ -64,7 +64,7 @@ public class MapLoader {
                         case 'O':
                             mapCells[row][col] = 10;
                             break;
-                        case 'E':
+                        case 'Q':
                             mapCells[row][col] = 11;
                             break;
                         case 'D':
@@ -72,6 +72,18 @@ public class MapLoader {
                             break;
                         case 'V':
                             mapCells[row][col] = 13;
+                            break;
+                        case 'E':
+                            mapCells[row][col] = 14;
+                            break;
+                        case 'M':
+                            mapCells[row][col] = 15;
+                            break;
+                        case 'R':
+                            mapCells[row][col] = 16;
+                            break;
+                        case 'Y':
+                            mapCells[row][col] = 17;
                             break;
                         case '-':
                             mapCells[row][col] = 0;

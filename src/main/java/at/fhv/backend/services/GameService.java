@@ -59,12 +59,18 @@ public class GameService {
         return game;
     }
 
-    public Game setGameAttributes(String gameCode, List<Player> Players) {
+    public Game setGameAttributes(String gameCode, List<Player> players) {
         Game game = gameRepository.findByGameCode(gameCode);
         if (game != null) {
-            game.setPlayers(Players);
+            game.setPlayers(players);
             gameRepository.save(game);
         }
         return game;
     }
+
+    public void triggerEmergency(String gameCode) {
+        messagingTemplate.convertAndSend("/topic/" + gameCode + "/emergency", "emergency");
+    }
+
+
 }
