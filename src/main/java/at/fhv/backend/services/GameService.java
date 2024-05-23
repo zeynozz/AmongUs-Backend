@@ -72,5 +72,9 @@ public class GameService {
         messagingTemplate.convertAndSend("/topic/" + gameCode + "/emergency", "emergency");
     }
 
-
+    public void triggerSabotage(String gameCode) {
+        messagingTemplate.convertAndSend("/topic/" + gameCode + "/sabotage", "sabotage");
+    }
 }
+
+

@@ -159,4 +159,10 @@ public class GameController {
         gameService.triggerEmergency(gameCode);
     }
 
+    @MessageMapping("/sabotage")
+    public void handleSabotage(@Payload String gameCode) {
+        gameService.triggerSabotage(gameCode);
+    }
+
+
 }
