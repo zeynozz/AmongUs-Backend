@@ -88,7 +88,6 @@ public class GameController {
         }
     }
 
-
     @MessageMapping("/{gameCode}/play")
     @SendTo("/topic/{gameCode}/play")
     public Game playGame(@RequestBody Game gameToPlay) {
@@ -154,4 +153,10 @@ public class GameController {
         int yDiff = Math.abs(pos1.getY() - pos2.getY());
         return (xDiff == 1 && yDiff == 0) || (xDiff == 0 && yDiff == 1);
     }
+
+    @MessageMapping("/emergency")
+    public void handleEmergency(@Payload String gameCode) {
+        gameService.triggerEmergency(gameCode);
+    }
+
 }
