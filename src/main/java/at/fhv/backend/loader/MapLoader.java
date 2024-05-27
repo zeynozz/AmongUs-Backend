@@ -85,6 +85,9 @@ public class MapLoader {
                         case 'Y':
                             mapCells[row][col] = 17;
                             break;
+                        case 'N':
+                            mapCells[row][col] = 18;
+                            break;
                         case '-':
                             mapCells[row][col] = 0;
                             break;
