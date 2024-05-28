@@ -5,7 +5,10 @@ import at.fhv.backend.model.Player;
 import at.fhv.backend.model.Position;
 import at.fhv.backend.generators.RoleGenerator;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 @Service
 public class PlayerService {
@@ -35,19 +38,6 @@ public class PlayerService {
         return new Position(0, 0);
     }
 
-    public void updatePlayerPosition(Player player, Position newPosition) {
-        int x = newPosition.getX();
-        int y = newPosition.getY();
-        boolean outOfBounds =
-                (x < 0) ||
-                        (y < 0) ||
-                        (y >= mapService.getMap().length) ||
-                        (x >= mapService.getMap()[0].length);
-
-        if (!outOfBounds && mapService.isCellWalkable(x, y)) {
-            player.setPosition(newPosition);
-        }
-    }
 
     public Position calculateNewPosition(Position currentPosition, String keyCode) {
         int deltaX = 0, deltaY = 0;
@@ -91,4 +81,35 @@ public class PlayerService {
         }
         return Players;
     }
+
+    public Position teleportToVent(Position currentPosition, int[][] map) {
+        List<Position> vents = new ArrayList<>();
+        for (int y = 0; y < map.length; y++) {
+            for (int x = 0; x < map[y].length; x++) {
+                if (map[y][x] == 18) {
+                    vents.add(new Position(x, y));
+                }
+            }
+        }
+        if (vents.size() > 1) {
+            vents.removeIf(vent -> vent.equals(currentPosition));
+            return vents.get(new Random().nextInt(vents.size()));
+        }
+        return currentPosition;
+    }
+
+    public void updatePlayerPosition(Player player, Position newPosition) {
+        int x = newPosition.getX();
+        int y = newPosition.getY();
+        boolean outOfBounds =
+                (x < 0) ||
+                        (y < 0) ||
+                        (y >= mapService.getMap().length) ||
+                        (x >= mapService.getMap()[0].length);
+
+        if (!outOfBounds && mapService.isCellWalkable(x, y)) {
+            player.setPosition(newPosition);
+        }
+    }
+
 }

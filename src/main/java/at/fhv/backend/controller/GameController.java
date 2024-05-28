@@ -34,7 +34,7 @@ public class GameController {
     public GameController(GameService gameService, PlayerService playerService, SimpMessagingTemplate messagingTemplate) {
         this.gameService = gameService;
         this.playerService = playerService;
-        this.messagingTemplate = messagingTemplate; // Initialize messaging template
+        this.messagingTemplate = messagingTemplate;
     }
 
     @PostMapping("/host")
@@ -132,12 +132,12 @@ public class GameController {
                     return ResponseEntity.ok(game);
                 } else {
                     System.err.println("Victim is not adjacent to the impostor");
-                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(game); // Return the game object even in case of failure
+                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(game);
                 }
             }
         }
         System.err.println("Kill action failed");
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null); // Return null or an empty game object in case of failure
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
     }
 
     private void sendPlayerRemovedMessage(String gameCode, int playerId) {
@@ -163,6 +163,26 @@ public class GameController {
     public void handleSabotage(@Payload String gameCode) {
         gameService.triggerSabotage(gameCode);
     }
+
+    @MessageMapping("/vent")
+    @SendTo("/topic/positionChange")
+    public Game ventPlayer(@Payload MoveCom playerMoveMessage) {
+        int playerId = playerMoveMessage.getId();
+        Game game = gameService.getGameByCode(playerMoveMessage.getGameCode());
+        Player player = game.getPlayers().stream().filter(p -> p.getId() == playerId).findFirst().orElse(null);
+
+        if (player != null) {
+            Position newPosition = playerService.teleportToVent(player.getPosition(), game.getMap());
+            playerService.updatePlayerPosition(player, newPosition);
+            System.out.println("Player ID: " + playerId + " teleported to position: " + newPosition.getX() + ", " + newPosition.getY());
+            game.getPlayers().stream().filter(p -> p.getId() == playerId).findFirst().ifPresent(p -> p.setPosition(newPosition));
+            return game;
+        }
+        return null;
+    }
+
+
+
 
 
 }
