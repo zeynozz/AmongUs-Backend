@@ -1,10 +1,7 @@
 package at.fhv.backend.controller;
 
 import at.fhv.backend.model.*;
-import at.fhv.backend.model.com.GameCom;
-import at.fhv.backend.model.com.JoinCom;
-import at.fhv.backend.model.com.KillCom;
-import at.fhv.backend.model.com.MoveCom;
+import at.fhv.backend.model.com.*;
 import at.fhv.backend.services.GameService;
 import at.fhv.backend.services.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -118,27 +115,41 @@ public class GameController {
     }
 
     @MessageMapping("/kill")
-    @SendTo("/topic/playerKilled")
-    public ResponseEntity<Game> killPlayer(@Payload KillCom killCom) {
+    public void killPlayer(@Payload KillCom killCom) {
         Game game = games.get(killCom.getGameCode());
         if (game != null) {
-            Player killer = game.getPlayers().stream().filter(p -> p.getId() == killCom.getKillerId()).findFirst().orElse(null);
-            Player victim = game.getPlayers().stream().filter(p -> p.getId() == killCom.getVictimId()).findFirst().orElse(null);
-            if (killer != null && victim != null && "IMPOSTOR".equals(killer.getRole())) {
+            Player killer = game.getPlayers().stream()
+                    .filter(p -> p.getId() == killCom.getKillerId())
+                    .findFirst()
+                    .orElse(null);
+            Player victim = game.getPlayers().stream()
+                    .filter(p -> p.getId() == killCom.getVictimId())
+                    .findFirst()
+                    .orElse(null);
+            if (killer != null && victim != null && "IMPOSTOR".equals(killer.getRole()) && victim.getStatus() == Status.ALIVE) {
                 if (isAdjacent(killer.getPosition(), victim.getPosition())) {
-                    game.getPlayers().remove(victim);
-                    System.out.println("The player is removed");
-                    sendPlayerRemovedMessage(killCom.getGameCode(), killCom.getVictimId()); // Send the removed player ID to all clients
-                    return ResponseEntity.ok(game);
+                    victim.setStatus(Status.DEAD);
+                    victim.setColor(victim.getChosenColor() + "Ghost"); // Update color to ghost color
+                    System.out.println("Player " + victim.getUsername() + " has been killed");
+
+                    // Send kill animation to the impostor and the victim
+                    messagingTemplate.convertAndSendToUser(killer.getUsername(), "/queue/killAnimation", "KILL_ANIMATION");
+                    messagingTemplate.convertAndSendToUser(victim.getUsername(), "/queue/killAnimation", "KILL_ANIMATION");
+
+                    // Update game state for all players
+                    messagingTemplate.convertAndSend("/topic/playerKilled", game);
+
+                    sendPlayerRemovedMessage(killCom.getGameCode(), killCom.getVictimId());
                 } else {
                     System.err.println("Victim is not adjacent to the impostor");
-                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(game);
                 }
             }
+        } else {
+            System.err.println("Kill action failed");
         }
-        System.err.println("Kill action failed");
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
     }
+
+
 
     private void sendPlayerRemovedMessage(String gameCode, int playerId) {
         Map<String, Object> message = new HashMap<>();
@@ -146,6 +157,12 @@ public class GameController {
         message.put("removedPlayerId", playerId);
 
         messagingTemplate.convertAndSend("/topic/playerRemoved", message);
+    }
+
+    @MessageMapping("/checkAdjacent")
+    public void checkAdjacent(PositionCheckRequest request) {
+        boolean isAdjacent = isAdjacent(request.getPos1(), request.getPos2());
+        messagingTemplate.convertAndSend("/topic/checkAdjacentResult", new PositionCheckResponse(request.getPlayerId(), isAdjacent));
     }
 
     private boolean isAdjacent(Position pos1, Position pos2) {
@@ -182,7 +199,20 @@ public class GameController {
     }
 
 
-
+    @MessageMapping("/selectColor")
+    public void selectColor(@Payload ColorSelectionCom colorSelectionCom) {
+        Game game = games.get(colorSelectionCom.getGameCode());
+        if (game != null) {
+            Player player = game.getPlayers().stream()
+                    .filter(p -> p.getId() == colorSelectionCom.getPlayerId())
+                    .findFirst()
+                    .orElse(null);
+            if (player != null) {
+                player.setChosenColor(colorSelectionCom.getColor());
+                messagingTemplate.convertAndSendToUser(player.getUsername(), "/queue/colorSelected", player);
+            }
+        }
+    }
 
 
 }

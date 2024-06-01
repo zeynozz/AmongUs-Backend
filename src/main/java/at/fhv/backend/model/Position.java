@@ -4,6 +4,7 @@ public class Position {
     private int x;
     private int y;
 
+
     public Position() {
 
     }
@@ -28,4 +29,5 @@ public class Position {
     public void setY(int y) {
         this.y = y;
     }
+
 }

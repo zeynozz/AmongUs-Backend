@@ -2,6 +2,7 @@ package at.fhv.backend.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
+import lombok.Setter;
 
 public class Player {
     private static int idCounter = 1;
@@ -18,18 +19,25 @@ public class Player {
     private String role;
     @Getter
     private String color;
+    @Getter
+    @Setter
+    private Status status;
+    @Getter
+    @Setter
+    private String chosenColor;
 
-    public Player(String username, Position position, Game game, String color) {
+    public Player(String username, Position position, Game game, String color, Status status) {
         this.id = idCounter++;
         this.username = username;
         this.position = position;
         this.game = game;
         this.role = "Crewmate";
-        this.color = color; // Set color from parameter
+        this.color = color;
+        this.status = status.ALIVE;
+
     }
 
-    public Player() {
-    }
+
 
     public void setId(int id) {
         this.id = id;
