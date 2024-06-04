@@ -75,6 +75,16 @@ public class GameService {
     public void triggerSabotage(String gameCode) {
         messagingTemplate.convertAndSend("/topic/" + gameCode + "/sabotage", "sabotage");
     }
+    public void removePlayer(String gameCode, String playerName) {
+        Game game = gameRepository.findByGameCode(gameCode);
+        if (game != null) {
+            List<Player> players = game.getPlayers();
+            players.removeIf(player -> player.getUsername().equals(playerName));
+            game.setPlayers(players);
+            gameRepository.save(game);
+            messagingTemplate.convertAndSend("/topic/" + gameCode + "/updatedPlayers", game.getPlayers());
+        }
+    }
 }
 
 

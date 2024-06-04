@@ -6,11 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="fc3f0e3b-784e-408a-8c4d-c11663bf0190" name="Changes" comment="update map cells">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/controller/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhv/backend/controller/GameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/model/com/MoveCom.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhv/backend/model/com/MoveCom.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/services/PlayerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhv/backend/services/PlayerService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/services/GameService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhv/backend/services/GameService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/at/fhv/backend/controller/gameController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/at/fhv/backend/controller/gameController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/at/fhv/backend/model/com/moveCom.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/at/fhv/backend/model/com/moveCom.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/at/fhv/backend/services/gameService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/at/fhv/backend/services/gameService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/target/classes/at/fhv/backend/services/playerService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/at/fhv/backend/services/playerService.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -75,7 +73,7 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;Spring Boot.AmongUsBackendApplication.executor&quot;: &quot;Run&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;vent&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;voting&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;/Users/kulac/Documents/AmongUs-Backend&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
@@ -167,6 +165,14 @@
       <workItem from="1716571688060" duration="3754000" />
       <workItem from="1716807878964" duration="2755000" />
       <workItem from="1716914803287" duration="3235000" />
+      <workItem from="1716922195766" duration="1242000" />
+      <workItem from="1716980761897" duration="618000" />
+      <workItem from="1716983897549" duration="365000" />
+      <workItem from="1717183133105" duration="789000" />
+      <workItem from="1717257975107" duration="8310000" />
+      <workItem from="1717353144657" duration="7426000" />
+      <workItem from="1717515683141" duration="782000" />
+      <workItem from="1717516485635" duration="655000" />
     </task>
     <task id="LOCAL-00001" summary="update map cells">
       <option name="closed" value="true" />
@@ -185,5 +191,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="update map cells" />
     <option name="LAST_COMMIT_MESSAGE" value="update map cells" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/AmongUs_Backend$AmongUsBackendApplication.ic" NAME="AmongUsBackendApplication Coverage Results" MODIFIED="1717516406908" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>
