@@ -4,6 +4,7 @@ import at.fhv.backend.model.Game;
 import at.fhv.backend.model.Player;
 import at.fhv.backend.model.Position;
 import at.fhv.backend.generators.RoleGenerator;
+import at.fhv.backend.model.Status;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ public class PlayerService {
         if (!mapService.isCellWalkable(position.getX(), position.getY())) {
             position = findWalkablePosition();
         }
-        return new Player(username, position, game, color);
+        return new Player(username, position, game, color, Status.ALIVE);
     }
 
     private Position findWalkablePosition() {
