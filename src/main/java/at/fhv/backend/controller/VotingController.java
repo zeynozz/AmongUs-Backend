@@ -1,6 +1,5 @@
 package at.fhv.backend.controller;
 
-import at.fhv.backend.model.Game;
 import at.fhv.backend.model.VoteMessage;
 import at.fhv.backend.services.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,28 +20,43 @@ public class VotingController {
     @Autowired
     private GameService gameService;
 
-    private Map<String, Map<String, Integer>> votes = new HashMap<>();
+    private Map<String, Map<String, String>> votes = new HashMap<>();
 
     @MessageMapping("/castVote")
     public void castVote(@Payload VoteMessage voteMessage) {
         String gameCode = voteMessage.getGameCode();
         String votedPlayer = voteMessage.getVotedPlayer();
+        String voter = voteMessage.getVoter();
 
         votes.putIfAbsent(gameCode, new HashMap<>());
-        Map<String, Integer> gameVotes = votes.get(gameCode);
-        gameVotes.put(votedPlayer, gameVotes.getOrDefault(votedPlayer, 0) + 1);
+        Map<String, String> gameVotes = votes.get(gameCode);
+        gameVotes.put(voter, votedPlayer);
 
-        String playerToRemove = determinePlayerToRemove(gameVotes);
+        messagingTemplate.convertAndSend("/topic/" + gameCode + "/voteConfirmation", "Vote casted by: " + voter);
+    }
 
-        if (playerToRemove != null) {
-            gameService.removePlayer(gameCode, playerToRemove);
+    @MessageMapping("/collectVotes")
+    public void collectVotes(@Payload String gameCode) {
+        Map<String, Integer> voteCount = new HashMap<>();
+
+        if (votes.containsKey(gameCode)) {
+            for (String votedPlayer : votes.get(gameCode).values()) {
+                voteCount.put(votedPlayer, voteCount.getOrDefault(votedPlayer, 0) + 1);
+            }
+
+            String playerToRemove = determinePlayerToRemove(voteCount);
+
+            if (playerToRemove != null) {
+                gameService.removePlayer(gameCode, playerToRemove);
+                messagingTemplate.convertAndSend("/topic/" + gameCode + "/votingResults", playerToRemove);
+            }
+
             votes.remove(gameCode);
-            messagingTemplate.convertAndSend("/topic/" + gameCode + "/votingResults", playerToRemove);
         }
     }
 
-    private String determinePlayerToRemove(Map<String, Integer> gameVotes) {
-        return gameVotes.entrySet().stream()
+    private String determinePlayerToRemove(Map<String, Integer> voteCount) {
+        return voteCount.entrySet().stream()
                 .max(Map.Entry.comparingByValue())
                 .map(Map.Entry::getKey)
                 .orElse(null);
