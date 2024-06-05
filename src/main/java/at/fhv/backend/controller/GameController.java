@@ -19,6 +19,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.FileNotFoundException;
+import java.sql.SQLOutput;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -108,12 +109,15 @@ public class GameController {
         Player player = game.getPlayers().stream().filter(p -> p.getId() == playerId).findFirst().orElse(null);
 
         if (player != null) {
-            Position newPosition = playerService.calculateNewPosition(player.getPosition(), playerMoveMessage.getKeyCode());
+            if (player.getStatus() == Status.ALIVE){
+            Position newPosition = playerService.calculateNewPosition(player, playerMoveMessage.getKeyCode());
             playerService.updatePlayerPosition(player, newPosition);
             System.out.println("Player ID: " + playerId + " moved to position: " + player.getPosition().getX() + ", " + player.getPosition().getY());
             return game;
+        } else {
+                System.out.println("Move attempted by player ID: " + playerId + " who is DEAD.");
+            }
         }
-
         return null;
     }
 

@@ -25,6 +25,10 @@ public class Player {
     @Getter
     @Setter
     private String chosenColor;
+    @Getter
+    private String direction;
+    @Getter
+    private int imageIndex;
 
     public Player(String username, Position position, Game game, String color, Status status) {
         this.id = idCounter++;
@@ -34,6 +38,8 @@ public class Player {
         this.role = "Crewmate";
         this.color = color;
         this.status = status.ALIVE;
+        this.direction = "right";
+        this.imageIndex = 0;
 
     }
 
@@ -57,6 +63,14 @@ public class Player {
 
     public void setColor(String color) {
         this.color = color;
+    }
+
+    public void setDirection(String direction) {
+        this.direction = direction;
+    }
+
+    public void setImageIndex(int imageIndex) {
+        this.imageIndex = imageIndex;
     }
     public Game getGame() {
         return this.game;

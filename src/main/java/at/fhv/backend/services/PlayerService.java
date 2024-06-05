@@ -40,26 +40,40 @@ public class PlayerService {
     }
 
 
-    public Position calculateNewPosition(Position currentPosition, String keyCode) {
+    public Position calculateNewPosition(Player player, String keyCode) {
         int deltaX = 0, deltaY = 0;
+        String direction = player.getDirection();
+        int imageIndex = player.getImageIndex();
+
         switch (keyCode) {
             case "KeyA":
                 deltaX = -1;
+                direction = "left";
+                imageIndex = (imageIndex + 1) % 4;
                 break;
             case "KeyW":
                 deltaY = -1;
+                direction = "upDown";
+                imageIndex = 0;
                 break;
             case "KeyD":
                 deltaX = 1;
+                direction = "right";
+                imageIndex = (imageIndex + 1) % 4;
                 break;
             case "KeyS":
                 deltaY = 1;
+                direction = "upDown";
+                imageIndex = 0;
                 break;
             default:
                 System.out.println("Invalid key code");
                 break;
         }
-        return new Position(currentPosition.getX() + deltaX, currentPosition.getY() + deltaY);
+
+        player.setDirection(direction);
+        player.setImageIndex(imageIndex);
+        return new Position(player.getPosition().getX() + deltaX, player.getPosition().getY() + deltaY);
     }
 
     public Player setInitialRandomRole(int numPlayers, int numImpostors, Player player) {
