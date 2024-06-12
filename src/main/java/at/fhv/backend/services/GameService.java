@@ -4,12 +4,15 @@ import at.fhv.backend.model.Game;
 import at.fhv.backend.generators.CodeGenerator;
 import at.fhv.backend.model.Player;
 import at.fhv.backend.memory.GameMemory;
+import at.fhv.backend.model.VotingResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
 
 import java.io.FileNotFoundException;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class GameService {
@@ -83,6 +86,58 @@ public class GameService {
             game.setPlayers(players);
             gameRepository.save(game);
             messagingTemplate.convertAndSend("/topic/" + gameCode + "/updatedPlayers", game.getPlayers());
+        }
+    }
+
+    public void handleReport(String gameCode) {
+        messagingTemplate.convertAndSend("/topic/" + gameCode + "/report", "report");
+    }
+
+    public void collectVotes(String gameCode, Map<String, String> votes) {
+        Game game = gameRepository.findByGameCode(gameCode);
+        if (game != null) {
+            Map<String, Long> voteCount = votes.values().stream()
+                    .collect(Collectors.groupingBy(v -> v, Collectors.counting()));
+
+            String playerToEliminate = voteCount.entrySet().stream()
+                    .max(Map.Entry.comparingByValue())
+                    .map(Map.Entry::getKey)
+                    .orElse(null);
+
+            if (playerToEliminate != null) {
+                Player eliminatedPlayer = game.getPlayers().stream()
+                        .filter(p -> p.getUsername().equals(playerToEliminate))
+                        .findFirst()
+                        .orElse(null);
+
+                if (eliminatedPlayer != null) {
+                    boolean isImpostor = "IMPOSTOR".equals(eliminatedPlayer.getRole());
+                    boolean gameShouldContinue = game.getPlayers().stream()
+                            .anyMatch(p -> "IMPOSTOR".equals(p.getRole()) && !p.getUsername().equals(playerToEliminate));
+
+                    if (isImpostor) {
+                        messagingTemplate.convertAndSend("/topic/" + gameCode + "/votingResults",
+                                new VotingResult(eliminatedPlayer.getUsername(), eliminatedPlayer.getColor(), true, !gameShouldContinue));
+                        if (!gameShouldContinue) {
+                            endGame(gameCode);
+                        }
+                    } else {
+                        removePlayer(gameCode, playerToEliminate);
+                        messagingTemplate.convertAndSend("/topic/" + gameCode + "/votingResults",
+                                new VotingResult(eliminatedPlayer.getUsername(), eliminatedPlayer.getColor(), false, false));
+                    }
+                }
+            }
+        }
+    }
+
+
+    public void endGame(String gameCode) {
+        // Implement the logic to end the game, notify all players, etc.
+        Game game = gameRepository.findByGameCode(gameCode);
+        if (game != null) {
+            messagingTemplate.convertAndSend("/topic/" + gameCode + "/gameEnd", "Crewmates win!");
+            gameRepository.deleteByGameCode(gameCode);
         }
     }
 }

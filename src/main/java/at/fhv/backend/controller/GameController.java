@@ -10,6 +10,7 @@ import at.fhv.backend.services.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -22,6 +23,7 @@ import java.io.FileNotFoundException;
 import java.sql.SQLOutput;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/game")
@@ -29,7 +31,8 @@ public class GameController {
     private final GameService gameService;
     private final PlayerService playerService;
     private final SimpMessagingTemplate messagingTemplate; // Injected messaging template
-    private final Map<String, Game> games = new HashMap<>();
+    private final Map<String, Game> games = new HashMap<>(); // Variable hinzugefügt
+    private final Map<String, Map<String, String>> gameVotes = new HashMap<>();
 
     @Autowired
     public GameController(GameService gameService, PlayerService playerService, SimpMessagingTemplate messagingTemplate) {
@@ -136,17 +139,22 @@ public class GameController {
             if (killer != null && victim != null && "IMPOSTOR".equals(killer.getRole()) && victim.getStatus() == Status.ALIVE) {
                 if (isAdjacent(killer.getPosition(), victim.getPosition())) {
                     victim.setStatus(Status.DEAD);
-                    victim.setColor(victim.getChosenColor() + "Ghost"); // Update color to ghost color
-                    System.out.println("Player " + victim.getUsername() + " has been killed");
+                    victim.setColor(victim.getChosenColor() + "Ghost");
 
-                    // Send kill animation to the impostor and the victim
                     messagingTemplate.convertAndSendToUser(killer.getUsername(), "/queue/killAnimation", "KILL_ANIMATION");
                     messagingTemplate.convertAndSendToUser(victim.getUsername(), "/queue/killAnimation", "KILL_ANIMATION");
 
-                    // Update game state for all players
                     messagingTemplate.convertAndSend("/topic/playerKilled", game);
 
                     sendPlayerRemovedMessage(killCom.getGameCode(), killCom.getVictimId());
+
+                    if (areAllImpostorsDead(game)) {
+                        messagingTemplate.convertAndSend("/topic/" + killCom.getGameCode() + "/gameEnd", "CREWMATES_WIN");
+                        gameService.endGame(killCom.getGameCode());
+                    } else if (areAllCrewmatesDead(game)) {
+                        messagingTemplate.convertAndSend("/topic/" + killCom.getGameCode() + "/gameEnd", "IMPOSTORS_WIN");
+                        gameService.endGame(killCom.getGameCode());
+                    }
                 } else {
                     System.err.println("Victim is not adjacent to the impostor");
                 }
@@ -156,7 +164,17 @@ public class GameController {
         }
     }
 
+    private boolean areAllImpostorsDead(Game game) {
+        return game.getPlayers().stream()
+                .filter(p -> "IMPOSTOR".equals(p.getRole()))
+                .allMatch(p -> p.getStatus() == Status.DEAD);
+    }
 
+    private boolean areAllCrewmatesDead(Game game) {
+        return game.getPlayers().stream()
+                .filter(p -> "CREWMATE".equals(p.getRole()))
+                .allMatch(p -> p.getStatus() == Status.DEAD);
+    }
 
     private void sendPlayerRemovedMessage(String gameCode, int playerId) {
         Map<String, Object> message = new HashMap<>();
@@ -178,8 +196,6 @@ public class GameController {
         return (xDiff == 1 && yDiff == 0) || (xDiff == 0 && yDiff == 1);
     }
 
-
-
     @MessageMapping("/emergency")
     public void handleEmergency(@Payload String gameCode) {
         gameService.triggerEmergency(gameCode);
@@ -194,7 +210,7 @@ public class GameController {
     @SendTo("/topic/positionChange")
     public Game ventPlayer(@Payload MoveCom playerMoveMessage) {
         int playerId = playerMoveMessage.getId();
-        Game game = gameService.getGameByCode(playerMoveMessage.getGameCode());
+        Game game = games.get(playerMoveMessage.getGameCode()); // Spieleinstanz aus der Map abrufen
         Player player = game.getPlayers().stream().filter(p -> p.getId() == playerId).findFirst().orElse(null);
 
         if (player != null) {
@@ -205,6 +221,53 @@ public class GameController {
             return game;
         }
         return null;
+    }
+
+    @MessageMapping("/report")
+    public void handleReport(@Payload String gameCode) {
+        gameService.handleReport(gameCode);
+    }
+
+    @MessageMapping("/{gameCode}/castVote")
+    public void castVote(@DestinationVariable String gameCode, @Payload VoteMessage voteMessage) {
+        gameVotes.computeIfAbsent(gameCode, k -> new HashMap<>()).put(voteMessage.getVoter(), voteMessage.getVotedPlayer());
+    }
+
+    @MessageMapping("/{gameCode}/collectVotes")
+    public void collectVotes(@DestinationVariable String gameCode) {
+        Map<String, String> votes = gameVotes.get(gameCode);
+        if (votes != null) {
+            Map<String, Long> voteCount = votes.values().stream()
+                    .collect(Collectors.groupingBy(v -> v, Collectors.counting()));
+
+            String playerToEliminate = voteCount.entrySet().stream()
+                    .max(Map.Entry.comparingByValue())
+                    .map(Map.Entry::getKey)
+                    .orElse(null);
+
+            if (playerToEliminate != null) {
+                Game game = gameService.getGameByCode(gameCode);
+                Player eliminatedPlayer = game.getPlayers().stream()
+                        .filter(p -> p.getUsername().equals(playerToEliminate))
+                        .findFirst()
+                        .orElse(null);
+
+                if (eliminatedPlayer != null) {
+                    eliminatedPlayer.setStatus(Status.DEAD);
+
+                    messagingTemplate.convertAndSend("/topic/" + gameCode + "/votingResults", eliminatedPlayer);
+
+                    if (areAllImpostorsDead(game)) {
+                        messagingTemplate.convertAndSend("/topic/" + gameCode + "/gameEnd", "CREWMATES_WIN");
+                        gameService.endGame(gameCode);
+                    } else if (areAllCrewmatesDead(game)) {
+                        messagingTemplate.convertAndSend("/topic/" + gameCode + "/gameEnd", "IMPOSTORS_WIN");
+                        gameService.endGame(gameCode);
+                    }
+                }
+                gameVotes.remove(gameCode);
+            }
+        }
     }
 
 
