@@ -1,27 +1,21 @@
-package at.fhv.backend.controller;
+package at.fhv.backend.controller;// Aktualisierte Methoden in GameController.java
 
 import at.fhv.backend.model.*;
-import at.fhv.backend.model.com.GameCom;
-import at.fhv.backend.model.com.JoinCom;
-import at.fhv.backend.model.com.KillCom;
-import at.fhv.backend.model.com.MoveCom;
+import at.fhv.backend.model.com.*;
 import at.fhv.backend.services.GameService;
 import at.fhv.backend.services.PlayerService;
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.messaging.handler.annotation.DestinationVariable;
-import org.springframework.messaging.handler.annotation.MessageMapping;
-import org.springframework.messaging.handler.annotation.Payload;
-import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.messaging.handler.annotation.*;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.messaging.simp.annotation.SendToUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.FileNotFoundException;
-import java.sql.SQLOutput;
-import java.util.HashMap;
+import java.util.*;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -30,8 +24,8 @@ import java.util.stream.Collectors;
 public class GameController {
     private final GameService gameService;
     private final PlayerService playerService;
-    private final SimpMessagingTemplate messagingTemplate; // Injected messaging template
-    private final Map<String, Game> games = new HashMap<>(); // Variable hinzugefügt
+    private final SimpMessagingTemplate messagingTemplate;
+    private final Map<String, Game> games = new HashMap<>();
     private final Map<String, Map<String, String>> gameVotes = new HashMap<>();
 
     @Autowired
@@ -113,11 +107,11 @@ public class GameController {
 
         if (player != null) {
             if (player.getStatus() == Status.ALIVE){
-            Position newPosition = playerService.calculateNewPosition(player, playerMoveMessage.getKeyCode());
-            playerService.updatePlayerPosition(player, newPosition);
-            System.out.println("Player ID: " + playerId + " moved to position: " + player.getPosition().getX() + ", " + player.getPosition().getY());
-            return game;
-        } else {
+                Position newPosition = playerService.calculateNewPosition(player, playerMoveMessage.getKeyCode());
+                playerService.updatePlayerPosition(player, newPosition);
+                System.out.println("Player ID: " + playerId + " moved to position: " + player.getPosition().getX() + ", " + player.getPosition().getY());
+                return game;
+            } else {
                 System.out.println("Move attempted by player ID: " + playerId + " who is DEAD.");
             }
         }
@@ -149,11 +143,19 @@ public class GameController {
                     sendPlayerRemovedMessage(killCom.getGameCode(), killCom.getVictimId());
 
                     if (areAllImpostorsDead(game)) {
-                        messagingTemplate.convertAndSend("/topic/" + killCom.getGameCode() + "/gameEnd", "CREWMATES_WIN");
+                        messagingTemplate.convertAndSend("/topic/" + killCom.getGameCode() + "/gameEnd", getEndGameResponse("CREWMATES_WIN", game));
                         gameService.endGame(killCom.getGameCode());
                     } else if (areAllCrewmatesDead(game)) {
-                        messagingTemplate.convertAndSend("/topic/" + killCom.getGameCode() + "/gameEnd", "IMPOSTORS_WIN");
-                        gameService.endGame(killCom.getGameCode());
+                        new java.util.Timer().schedule(
+                                new java.util.TimerTask() {
+                                    @Override
+                                    public void run() {
+                                        messagingTemplate.convertAndSend("/topic/" + killCom.getGameCode() + "/gameEnd", getEndGameResponse("IMPOSTORS_WIN", game));
+                                        gameService.endGame(killCom.getGameCode());
+                                    }
+                                },
+                                3000
+                        );
                     }
                 } else {
                     System.err.println("Victim is not adjacent to the impostor");
@@ -162,6 +164,13 @@ public class GameController {
         } else {
             System.err.println("Kill action failed");
         }
+    }
+
+    private EndGameResponse getEndGameResponse(String result, Game game) {
+        List<Player> impostors = game.getPlayers().stream()
+                .filter(p -> "IMPOSTOR".equals(p.getRole()))
+                .collect(Collectors.toList());
+        return new EndGameResponse(result, impostors);
     }
 
     private boolean areAllImpostorsDead(Game game) {
@@ -210,7 +219,7 @@ public class GameController {
     @SendTo("/topic/positionChange")
     public Game ventPlayer(@Payload MoveCom playerMoveMessage) {
         int playerId = playerMoveMessage.getId();
-        Game game = games.get(playerMoveMessage.getGameCode()); // Spieleinstanz aus der Map abrufen
+        Game game = games.get(playerMoveMessage.getGameCode());
         Player player = game.getPlayers().stream().filter(p -> p.getId() == playerId).findFirst().orElse(null);
 
         if (player != null) {
@@ -254,14 +263,13 @@ public class GameController {
 
                 if (eliminatedPlayer != null) {
                     eliminatedPlayer.setStatus(Status.DEAD);
-
                     messagingTemplate.convertAndSend("/topic/" + gameCode + "/votingResults", eliminatedPlayer);
 
                     if (areAllImpostorsDead(game)) {
-                        messagingTemplate.convertAndSend("/topic/" + gameCode + "/gameEnd", "CREWMATES_WIN");
+                        messagingTemplate.convertAndSend("/topic/" + gameCode + "/gameEnd", getEndGameResponse("CREWMATES_WIN", game));
                         gameService.endGame(gameCode);
                     } else if (areAllCrewmatesDead(game)) {
-                        messagingTemplate.convertAndSend("/topic/" + gameCode + "/gameEnd", "IMPOSTORS_WIN");
+                        messagingTemplate.convertAndSend("/topic/" + gameCode + "/gameEnd", getEndGameResponse("IMPOSTORS_WIN", game));
                         gameService.endGame(gameCode);
                     }
                 }
@@ -270,8 +278,14 @@ public class GameController {
         }
     }
 
+    @Getter
+    private static class EndGameResponse {
+        private String result;
+        private List<Player> impostors;
 
-
-
-
+        public EndGameResponse(String result, List<Player> impostors) {
+            this.result = result;
+            this.impostors = impostors;
+        }
+    }
 }
