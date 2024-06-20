@@ -46,22 +46,22 @@ public class PlayerService {
         int imageIndex = player.getImageIndex();
 
         switch (keyCode) {
-            case "KeyA":
+            case "ArrowLeft":
                 deltaX = -1;
                 direction = "left";
                 imageIndex = (imageIndex + 1) % 4;
                 break;
-            case "KeyW":
+            case "ArrowUp":
                 deltaY = -1;
                 direction = "upDown";
                 imageIndex = 0;
                 break;
-            case "KeyD":
+            case "ArrowRight":
                 deltaX = 1;
                 direction = "right";
                 imageIndex = (imageIndex + 1) % 4;
                 break;
-            case "KeyS":
+            case "ArrowDown":
                 deltaY = 1;
                 direction = "upDown";
                 imageIndex = 0;

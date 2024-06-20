@@ -88,6 +88,18 @@ public class MapLoader {
                         case 'N':
                             mapCells[row][col] = 18;
                             break;
+                        case '*':
+                            mapCells[row][col] = 19;
+                            break;
+                        case 'F':
+                            mapCells[row][col] = 20;
+                            break;
+                        case 'Ü':
+                            mapCells[row][col] = 21;
+                            break;
+                        case '.':
+                            mapCells[row][col] = 22;
+                            break;
                         case '-':
                             mapCells[row][col] = 0;
                             break;

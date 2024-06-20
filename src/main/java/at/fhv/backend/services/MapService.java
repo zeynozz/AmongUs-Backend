@@ -36,8 +36,10 @@ public class MapService {
     }
 
     public boolean isCellWalkable(int x, int y) {
-        return map.getCellValue(x, y) == 1;
+        int cellValue = map.getCellValue(x, y);
+        return cellValue == 1 || cellValue == 19 || cellValue == 22 ;
     }
+
 
     public static void main(String[] args) {
     }
