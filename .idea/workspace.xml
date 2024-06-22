@@ -5,15 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fc3f0e3b-784e-408a-8c4d-c11663bf0190" name="Changes" comment="update map cells">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/loader/MapLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhv/backend/loader/MapLoader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/maps/spaceship.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhv/backend/maps/spaceship.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/services/MapService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhv/backend/services/MapService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/services/PlayerService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhv/backend/services/PlayerService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/at/fhv/backend/loader/MapLoader.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/at/fhv/backend/loader/MapLoader.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/at/fhv/backend/services/MapService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/at/fhv/backend/services/MapService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/classes/at/fhv/backend/services/playerService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/at/fhv/backend/services/playerService.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/controller/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhv/backend/controller/GameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/model/Status.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhv/backend/model/Status.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/services/GameService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhv/backend/services/GameService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,9 +75,9 @@
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;Spring Boot.AmongUsBackendApplication.executor&quot;: &quot;Run&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;fertigAnimation&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/zeyno/AmongUsProject/AmongUs-Backend&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/tugce/IdeaProjects/AMONGUS_FRONTEND/AmongUs-Frontend&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -123,19 +118,6 @@
       <option name="USE_OPTIONS" value="false" />
       <option name="OPTIONS" value="" />
       <method v="2" />
-    </configuration>
-    <configuration default="true" type="JetRunConfigurationType">
-      <module name="AmongUs-Backend" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <module name="AmongUs-Backend" />
-      <option name="filePath" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
     </configuration>
     <configuration default="true" type="PyBehaveRunConfigurationType" factoryName="Behave">
       <module name="AmongUs-Backend" />
@@ -185,13 +167,6 @@
       <option name="launchJavascriptDebuger" value="false" />
       <method v="2" />
     </configuration>
-    <configuration name="AmongUsBackendApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
-      <module name="AmongUs_Backend" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="at.fhv.backend.AmongUsBackendApplication" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration default="true" type="Tox" factoryName="Tox">
       <module name="AmongUs-Backend" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -203,6 +178,13 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <method v="2" />
+    </configuration>
+    <configuration name="AmongUsBackendApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="AmongUs_Backend" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="at.fhv.backend.AmongUsBackendApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <recent_temporary>
       <list>
@@ -293,6 +275,12 @@
       <workItem from="1718788616675" duration="5624000" />
       <workItem from="1718879839135" duration="2625000" />
       <workItem from="1718897304337" duration="653000" />
+      <workItem from="1718902487831" duration="11262000" />
+      <workItem from="1718967169357" duration="655000" />
+      <workItem from="1718972453955" duration="1713000" />
+      <workItem from="1718995566290" duration="1988000" />
+      <workItem from="1719053057319" duration="772000" />
+      <workItem from="1719055992827" duration="9495000" />
     </task>
     <task id="LOCAL-00001" summary="update map cells">
       <option name="closed" value="true" />

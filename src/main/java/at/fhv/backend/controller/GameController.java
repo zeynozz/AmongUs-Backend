@@ -1,4 +1,4 @@
-package at.fhv.backend.controller;// Aktualisierte Methoden in GameController.java
+package at.fhv.backend.controller;
 
 import at.fhv.backend.model.*;
 import at.fhv.backend.model.com.*;
@@ -106,7 +106,7 @@ public class GameController {
         Player player = game.getPlayers().stream().filter(p -> p.getId() == playerId).findFirst().orElse(null);
 
         if (player != null) {
-            if (player.getStatus() == Status.ALIVE){
+            if (player.getStatus() == Status.ALIVE) {
                 Position newPosition = playerService.calculateNewPosition(player, playerMoveMessage.getKeyCode());
                 playerService.updatePlayerPosition(player, newPosition);
                 System.out.println("Player ID: " + playerId + " moved to position: " + player.getPosition().getX() + ", " + player.getPosition().getY());
@@ -176,7 +176,7 @@ public class GameController {
     private boolean areAllImpostorsDead(Game game) {
         return game.getPlayers().stream()
                 .filter(p -> "IMPOSTOR".equals(p.getRole()))
-                .allMatch(p -> p.getStatus() == Status.DEAD);
+                .allMatch(p -> p.getStatus() == Status.VOTEDOUT);
     }
 
     private boolean areAllCrewmatesDead(Game game) {
@@ -265,16 +265,39 @@ public class GameController {
                     eliminatedPlayer.setStatus(Status.DEAD);
                     messagingTemplate.convertAndSend("/topic/" + gameCode + "/votingResults", eliminatedPlayer);
 
-                    if (areAllImpostorsDead(game)) {
-                        messagingTemplate.convertAndSend("/topic/" + gameCode + "/gameEnd", getEndGameResponse("CREWMATES_WIN", game));
-                        gameService.endGame(gameCode);
-                    } else if (areAllCrewmatesDead(game)) {
-                        messagingTemplate.convertAndSend("/topic/" + gameCode + "/gameEnd", getEndGameResponse("IMPOSTORS_WIN", game));
-                        gameService.endGame(gameCode);
-                    }
+                    eliminatedPlayer.setStatus(Status.DEAD);
+                    messagingTemplate.convertAndSend("/topic/" + gameCode + "/votingResults", eliminatedPlayer);
+
+                    checkGameEnd(game);
                 }
                 gameVotes.remove(gameCode);
             }
+        }
+    }
+
+    private void checkGameEnd(Game game) {
+        if (areAllImpostorsDead(game)) {
+            new java.util.Timer().schedule(
+                    new java.util.TimerTask() {
+                        @Override
+                        public void run() {
+                            messagingTemplate.convertAndSend("/topic/" + game.getGameCode() + "/gameEnd", getEndGameResponse("CREWMATES_WIN", game));
+                            gameService.endGame(game.getGameCode());
+                        }
+                    },
+                    6000
+            );
+        } else if (areAllCrewmatesDead(game)) {
+            new java.util.Timer().schedule(
+                    new java.util.TimerTask() {
+                        @Override
+                        public void run() {
+                            messagingTemplate.convertAndSend("/topic/" + game.getGameCode() + "/gameEnd", getEndGameResponse("IMPOSTORS_WIN", game));
+                            gameService.endGame(game.getGameCode());
+                        }
+                    },
+                    6000
+            );
         }
     }
 
@@ -288,4 +311,6 @@ public class GameController {
             this.impostors = impostors;
         }
     }
+
+
 }

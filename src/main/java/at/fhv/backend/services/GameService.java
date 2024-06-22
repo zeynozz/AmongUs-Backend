@@ -133,10 +133,9 @@ public class GameService {
 
 
     public void endGame(String gameCode) {
-        // Implement the logic to end the game, notify all players, etc.
         Game game = gameRepository.findByGameCode(gameCode);
         if (game != null) {
-            messagingTemplate.convertAndSend("/topic/" + gameCode + "/gameEnd", "Crewmates win!");
+            messagingTemplate.convertAndSend("/topic/" + gameCode + "/gameEnd");
             gameRepository.deleteByGameCode(gameCode);
         }
     }
