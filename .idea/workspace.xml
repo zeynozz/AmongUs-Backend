@@ -6,9 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="fc3f0e3b-784e-408a-8c4d-c11663bf0190" name="Changes" comment="update map cells">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/controller/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhv/backend/controller/GameController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/model/Status.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhv/backend/model/Status.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/services/GameService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhv/backend/services/GameService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/loader/MapLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhv/backend/loader/MapLoader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/maps/spaceship.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhv/backend/maps/spaceship.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/services/MapService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhv/backend/services/MapService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/at/fhv/backend/loader/MapLoader.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/at/fhv/backend/loader/MapLoader.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/at/fhv/backend/services/MapService.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/at/fhv/backend/services/MapService.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,30 +67,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
-    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
-    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
-    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;Spring Boot.AmongUsBackendApplication.executor&quot;: &quot;Run&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;fertigAnimation&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/tugce/IdeaProjects/AMONGUS_FRONTEND/AmongUs-Frontend&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "Spring Boot.AmongUsBackendApplication.executor": "Run",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "mapRooms",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/Users/zeyno/SON/AmongUs-Backend",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/main/java/at/fhv/backend/utils" />
@@ -118,6 +120,19 @@
       <option name="USE_OPTIONS" value="false" />
       <option name="OPTIONS" value="" />
       <method v="2" />
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="AmongUs-Backend" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="AmongUs-Backend" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
     </configuration>
     <configuration default="true" type="PyBehaveRunConfigurationType" factoryName="Behave">
       <module name="AmongUs-Backend" />
@@ -167,6 +182,13 @@
       <option name="launchJavascriptDebuger" value="false" />
       <method v="2" />
     </configuration>
+    <configuration name="AmongUsBackendApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
+      <module name="AmongUs_Backend" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="at.fhv.backend.AmongUsBackendApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="Tox" factoryName="Tox">
       <module name="AmongUs-Backend" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -178,13 +200,6 @@
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
       <method v="2" />
-    </configuration>
-    <configuration name="AmongUsBackendApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
-      <module name="AmongUs_Backend" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="at.fhv.backend.AmongUsBackendApplication" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
     </configuration>
     <recent_temporary>
       <list>
@@ -281,6 +296,7 @@
       <workItem from="1718995566290" duration="1988000" />
       <workItem from="1719053057319" duration="772000" />
       <workItem from="1719055992827" duration="9495000" />
+      <workItem from="1719227841738" duration="5282000" />
     </task>
     <task id="LOCAL-00001" summary="update map cells">
       <option name="closed" value="true" />

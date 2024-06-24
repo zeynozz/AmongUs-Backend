@@ -37,7 +37,7 @@ public class MapService {
 
     public boolean isCellWalkable(int x, int y) {
         int cellValue = map.getCellValue(x, y);
-        return cellValue == 1 || cellValue == 19 || cellValue == 22 ;
+        return cellValue == 1 || cellValue == 19 || cellValue == 22 || cellValue == 24 || cellValue == 33 ;
     }
 
 
