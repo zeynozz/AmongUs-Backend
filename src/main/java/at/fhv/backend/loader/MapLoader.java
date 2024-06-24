@@ -100,6 +100,45 @@ public class MapLoader {
                         case '.':
                             mapCells[row][col] = 22;
                             break;
+                        case 'Ä':
+                            mapCells[row][col] = 23;
+                            break;
+                        case ':':
+                            mapCells[row][col] = 24;
+                            break;
+                        case 'J':
+                            mapCells[row][col] = 25;
+                            break;
+                        case 's':
+                            mapCells[row][col] = 26;
+                            break;
+                        case 'o':
+                            mapCells[row][col] = 27;
+                            break;
+                        case 'f':
+                            mapCells[row][col] = 28;
+                            break;
+                        case 'a':
+                            mapCells[row][col] = 29;
+                            break;
+                        case 'c':
+                            mapCells[row][col] = 30;
+                            break;
+                        case 'u':
+                            mapCells[row][col] = 31;
+                            break;
+                        case 'x':
+                            mapCells[row][col] = 32;
+                            break;
+                        case ';':
+                            mapCells[row][col] = 33;
+                            break;
+                        case 't':
+                            mapCells[row][col] = 34;
+                            break;
+                        case 'p':
+                            mapCells[row][col] = 35;
+                            break;
                         case '-':
                             mapCells[row][col] = 0;
                             break;
