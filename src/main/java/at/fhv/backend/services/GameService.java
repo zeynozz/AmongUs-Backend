@@ -37,10 +37,12 @@ public class GameService {
 
         p = playerService.setInitialRandomRole(game.getNumberOfPlayers(), game.getNumberOfImpostors(), p);
         game.getPlayers().add(p);
+        game.setHostId(p.getId());
         gameRepository.save(game);
 
         for (int i = 0; i < game.getPlayers().size(); i++) {
             System.out.println("Player ID: " + game.getPlayers().get(i).getId() + " Game Role: " + game.getPlayers().get(i).getRole());
+            System.out.println("Host ID: " + game.getHostId());
         }
 
         return game;

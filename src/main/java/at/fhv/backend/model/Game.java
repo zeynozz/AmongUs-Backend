@@ -20,6 +20,8 @@ public class Game {
     @JsonManagedReference
     private List<Player> Players = new ArrayList<>();
     private int gameID = 0;
+    private int hostId;
+
 
     public Game(String gameCode, int numberOfPlayers, int numberOfImpostors, String map, List<Player> Players) throws FileNotFoundException {
         this.gameCode = gameCode;
