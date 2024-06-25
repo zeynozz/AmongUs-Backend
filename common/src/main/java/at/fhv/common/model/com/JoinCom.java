@@ -1,6 +1,6 @@
 package at.fhv.common.model.com;
 
-import at.fhv.backend.model.Position;
+import at.fhv.common.model.Position;
 import lombok.Getter;
 import lombok.Setter;
 

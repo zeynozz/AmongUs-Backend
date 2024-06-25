@@ -1,6 +1,6 @@
 package at.fhv.common.model.com;
 
-import at.fhv.backend.model.Player;
+import at.fhv.common.model.Player;
 import lombok.Getter;
 import lombok.Setter;
 

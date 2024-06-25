@@ -12,6 +12,9 @@ public class MoveCom {
     private String action;
 
 
+    public MoveCom() {
+    }
+
     public MoveCom(int id, String keyCode, String gameCode) {
         this.id = id;
         this.keyCode = keyCode;

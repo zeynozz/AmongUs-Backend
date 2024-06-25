@@ -30,6 +30,9 @@ public class Player {
     @Getter
     private int imageIndex;
 
+    public Player() {
+    }
+
     public Player(String username, Position position, Game game, String color, Status status) {
         this.id = idCounter++;
         this.username = username;

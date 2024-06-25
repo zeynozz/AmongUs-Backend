@@ -10,16 +10,22 @@
         <module name="map-service" />
         <module name="voting-service" />
         <module name="player-service" />
-        <module name="game-service" />
         <module name="common" />
+        <module name="game-service" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="AmongUs_Backend (1)" target="1.5" />
+      <module name="AmongUs_Backend (2)" target="1.5" />
+      <module name="gameservice" target="17" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="AmongUs_Backend" options="" />
       <module name="common" options="" />
-      <module name="game-service" options="" />
+      <module name="game-service" options="-parameters" />
+      <module name="gameservice" options="-parameters" />
       <module name="map-service" options="" />
       <module name="player-service" options="" />
       <module name="voting-service" options="" />

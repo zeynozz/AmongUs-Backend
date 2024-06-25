@@ -1,9 +1,9 @@
 package at.fhv.gameservice.controller;
 
-import at.fhv.backend.model.*;
-import at.fhv.backend.model.com.*;
-import at.fhv.backend.services.GameService;
-import at.fhv.backend.services.PlayerService;
+import at.fhv.common.model.*;
+import at.fhv.common.model.com.*;
+import at.fhv.common.services.GameService;
+import at.fhv.common.services.PlayerService;
 import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.io.FileNotFoundException;
 import java.util.*;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Controller

@@ -1,7 +1,7 @@
 package at.fhv.votingservice.controller;
 
-import at.fhv.backend.model.VoteMessage;
-import at.fhv.backend.services.GameService;
+import at.fhv.common.model.VoteMessage;
+import at.fhv.common.services.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;

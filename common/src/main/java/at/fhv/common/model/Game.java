@@ -3,7 +3,7 @@ package at.fhv.common.model;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Getter;
 import lombok.Setter;
-import at.fhv.backend.services.MapService;
+import at.fhv.common.services.MapService;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;

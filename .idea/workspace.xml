@@ -6,43 +6,32 @@
   <component name="ChangeListManager">
     <list default="true" id="fc3f0e3b-784e-408a-8c4d-c11663bf0190" name="Changes" comment="update map cells">
       <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/AmongUsBackendApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/CorsConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/WebSocketConfig.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/controller/ChatController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/controller/GameController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/controller/MapController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/controller/PlayerController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/controller/VotingController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/generators/CodeGenerator.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/generators/RoleGenerator.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/loader/MapLoader.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/maps/spaceship.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/memory/GameMemory.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/model/ChatMessage.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/model/Game.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/model/Map.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/model/Player.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/model/Position.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/model/PositionCheckRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/model/PositionCheckResponse.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/model/Status.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/model/VoteMessage.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/model/VotingResult.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/model/com/ColorSelectionCom.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/model/com/GameCom.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/model/com/JoinCom.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/model/com/KillCom.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/model/com/MoveCom.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/services/GameService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/services/MapService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/services/PlayerService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/services/VotingService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/common/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/at/fhv/common/loader/MapLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/at/fhv/common/loader/MapLoader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/at/fhv/common/maps/spaceship.txt" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/resources/maps/spaceship.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/at/fhv/common/model/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/at/fhv/common/model/Game.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/at/fhv/common/model/Map.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/at/fhv/common/model/Map.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/at/fhv/common/model/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/at/fhv/common/model/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/at/fhv/common/model/com/GameCom.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/at/fhv/common/model/com/GameCom.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/at/fhv/common/model/com/JoinCom.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/at/fhv/common/model/com/JoinCom.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/at/fhv/common/model/com/MoveCom.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/at/fhv/common/model/com/MoveCom.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/java/at/fhv/common/services/MapService.java" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/java/at/fhv/common/services/MapService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/common/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/common/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/game-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game-service/src/main/java/at/fhv/gameservice/GameServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/game-service/src/main/java/at/fhv/gameservice/GameServiceApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game-service/src/main/java/at/fhv/gameservice/controller/GameController.java" beforeDir="false" afterPath="$PROJECT_DIR$/game-service/src/main/java/at/fhv/gameservice/controller/GameController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/game-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/game-service/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/map-service/src/main/java/at/fhv/mapservice/MapServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/map-service/src/main/java/at/fhv/mapservice/MapServiceApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/map-service/src/main/java/at/fhv/mapservice/controller/MapController.java" beforeDir="false" afterPath="$PROJECT_DIR$/map-service/src/main/java/at/fhv/mapservice/controller/MapController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/map-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/map-service/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/player-service/src/main/java/at/fhv/playerservice/PlayerServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/player-service/src/main/java/at/fhv/playerservice/PlayerServiceApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/player-service/src/main/java/at/fhv/playerservice/controller/PlayerController.java" beforeDir="false" afterPath="$PROJECT_DIR$/player-service/src/main/java/at/fhv/playerservice/controller/PlayerController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/player-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/player-service/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/voting-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/voting-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/voting-service/src/main/java/at/fhv/votingservice/VotingServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/voting-service/src/main/java/at/fhv/votingservice/VotingServiceApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/voting-service/src/main/java/at/fhv/votingservice/controller/VotingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/voting-service/src/main/java/at/fhv/votingservice/controller/VotingController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -118,7 +107,7 @@
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.14450866&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;reference.projectsettings.compiler.annotationProcessors&quot;,
@@ -140,7 +129,7 @@
       <recent name="at.fhv.gameservice.controller" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.CommonApplication">
+  <component name="RunManager" selected="Spring Boot.GameServiceApplication">
     <configuration default="true" type="DjangoTestsConfigurationType">
       <module name="AmongUs-Backend" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -407,7 +396,8 @@
       <workItem from="1719055992827" duration="9495000" />
       <workItem from="1719227841738" duration="5282000" />
       <workItem from="1719301426777" duration="1455000" />
-      <workItem from="1719302889398" duration="536000" />
+      <workItem from="1719302889398" duration="1537000" />
+      <workItem from="1719304434254" duration="14402000" />
     </task>
     <task id="LOCAL-00001" summary="update map cells">
       <option name="closed" value="true" />

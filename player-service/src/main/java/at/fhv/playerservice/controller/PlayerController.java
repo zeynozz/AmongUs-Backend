@@ -1,7 +1,7 @@
 package at.fhv.playerservice.controller;
 
-import at.fhv.backend.services.GameService;
-import at.fhv.backend.services.PlayerService;
+import at.fhv.common.services.GameService;
+import at.fhv.common.services.PlayerService;
 import org.springframework.stereotype.Controller;
 
 @Controller

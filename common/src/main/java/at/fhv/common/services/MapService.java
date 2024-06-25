@@ -1,7 +1,7 @@
 package at.fhv.common.services;
 
 import org.springframework.stereotype.Service;
-import at.fhv.backend.model.Map;
+import at.fhv.common.model.Map;
 
 @Service
 public class MapService {

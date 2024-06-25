@@ -1,6 +1,6 @@
 package at.fhv.common.model;
 
-import at.fhv.backend.loader.MapLoader;
+import at.fhv.common.loader.MapLoader;
 
 public class Map {
 
