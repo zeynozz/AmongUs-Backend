@@ -5,8 +5,44 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fc3f0e3b-784e-408a-8c4d-c11663bf0190" name="Changes" comment="update map cells">
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/model/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhv/backend/model/Game.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/services/GameService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/at/fhv/backend/services/GameService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/AmongUsBackendApplication.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/CorsConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/WebSocketConfig.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/controller/ChatController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/controller/GameController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/controller/MapController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/controller/PlayerController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/controller/VotingController.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/generators/CodeGenerator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/generators/RoleGenerator.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/loader/MapLoader.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/maps/spaceship.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/memory/GameMemory.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/model/ChatMessage.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/model/Game.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/model/Map.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/model/Player.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/model/Position.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/model/PositionCheckRequest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/model/PositionCheckResponse.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/model/Status.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/model/VoteMessage.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/model/VotingResult.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/model/com/ColorSelectionCom.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/model/com/GameCom.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/model/com/JoinCom.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/model/com/KillCom.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/model/com/MoveCom.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/services/GameService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/services/MapService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/services/PlayerService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/at/fhv/backend/services/VotingService.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,40 +99,48 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "Spring Boot.AmongUsBackendApplication.executor": "Run",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "main",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "/Users/zeyno/SON/AmongUs-Backend",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;Spring Boot.AmongUsBackendApplication.executor&quot;: &quot;Run&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;21&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/zeyno/SON/AmongUs-Backend/common/src/main/java/at/fhv/common&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.14450866&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.projectsettings.compiler.annotationProcessors&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/common/src/main/java/at/fhv/common" />
       <recent name="$PROJECT_DIR$/src/main/java/at/fhv/backend/utils" />
       <recent name="$PROJECT_DIR$/src/main/java/at/fhv/backend/services" />
       <recent name="$PROJECT_DIR$/src/main/java/at/fhv/backend/skeld" />
       <recent name="$PROJECT_DIR$/src/main/java/at/fhv/backend/model" />
-      <recent name="$PROJECT_DIR$/src/main/java/at/fhv/backend/controller" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="at.fhv.mapservice" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="at.fhv.gameservice.controller" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Spring Boot.CommonApplication">
     <configuration default="true" type="DjangoTestsConfigurationType">
       <module name="AmongUs-Backend" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -185,6 +229,41 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="CommonApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="common" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="at.fhv.common.CommonApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="GameServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="game-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="at.fhv.gameservice.GameServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="MapServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="map-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="at.fhv.mapservice.MapServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PlayerServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="player-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="at.fhv.playerservice.PlayerServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="VotingServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="voting-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="at.fhv.votingservice.VotingServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration default="true" type="Tox" factoryName="Tox">
       <module name="AmongUs-Backend" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -195,6 +274,40 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Autodetect">
+      <module name="AmongUs_Backend" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration default="true" type="tests" factoryName="Doctests">
+      <module name="AmongUs_Backend" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="FOLDER_NAME" value="" />
+      <option name="TEST_TYPE" value="TEST_SCRIPT" />
+      <option name="PATTERN" value="" />
+      <option name="USE_PATTERN" value="false" />
       <method v="2" />
     </configuration>
     <recent_temporary>
@@ -293,6 +406,8 @@
       <workItem from="1719053057319" duration="772000" />
       <workItem from="1719055992827" duration="9495000" />
       <workItem from="1719227841738" duration="5282000" />
+      <workItem from="1719301426777" duration="1455000" />
+      <workItem from="1719302889398" duration="536000" />
     </task>
     <task id="LOCAL-00001" summary="update map cells">
       <option name="closed" value="true" />

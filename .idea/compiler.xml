@@ -7,13 +7,22 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="AmongUs_Backend" />
+        <module name="map-service" />
+        <module name="voting-service" />
+        <module name="player-service" />
+        <module name="game-service" />
+        <module name="common" />
       </profile>
     </annotationProcessing>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="AmongUs_Backend" options="-parameters" />
+      <module name="AmongUs_Backend" options="" />
+      <module name="common" options="" />
+      <module name="game-service" options="" />
+      <module name="map-service" options="" />
+      <module name="player-service" options="" />
+      <module name="voting-service" options="" />
     </option>
   </component>
 </project>
